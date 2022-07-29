@@ -6,6 +6,12 @@
 trigger:
 - main
 
+variables:
+  buildConfiguration: 'Release'
+  webRepository: 'web'
+  dockerfilepath: '$(Build.SourcesDirectory)/Shopping/Shopping.API/Dockerfile'
+  tag: '$(Build.BuildId)'
+
 pool:
   vmImage: ubuntu-latest
 
@@ -16,4 +22,14 @@ stages:
       - job: BuildJob        
         displayName: Build
         steps:
-          - task
+          - task: Docker@2
+            inputs:
+              containerRegistry: 'ACR'
+              repository: 'shoppingrep'
+              command: 'buildAndPush'
+              Dockerfile: $(dockerfilepath)
+              
+              tags: |
+                $(tag)
+
+            
