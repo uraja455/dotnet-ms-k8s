@@ -86,6 +86,9 @@ az aks install-cli
 Connect to cluster using kubectl
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 
+create image pull secret for aks to pull images from acr:
+kubectl create secret docker-registry acr-secret --docker-server=shoppingacr12657.azurecr.io --docker-username=shoppingacr12657 --docker-password=3AO48X0NgTzvBGs1B+nrn6ARgOe5T7Jn --docker-email=my@email.com
+
 To verify;
 kubectl get nodes
 kubectl get all
@@ -104,3 +107,7 @@ kubectl apply -f .\aks\
 Clean All AKS and Azure Resources
 
 az group delete --name myResourceGroup --yes --no-wait
+
+kubectl delete deployment "deployment name"
+kubectl describe pod "podname"
+kubectl scale --replicas 3 "deploymentname"
