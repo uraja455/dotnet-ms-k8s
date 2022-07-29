@@ -28,6 +28,7 @@ stages:
               repository: 'shoppingrep'
               command: 'buildAndPush'
               Dockerfile: $(dockerfilepath)
+              buildContext: $(Build.SourcesDirectory)/Shopping
               
               tags: |
                 $(tag)
